@@ -2,6 +2,7 @@
 {
     public class Funcionario
     {
+        public int ID { get; set; }
         public string Nome { get; set; }
         public int CPF { get; set; }
         public DateTime DataNasc { get; set; }
@@ -12,8 +13,9 @@
         {
         }
 
-        public Funcionario(string nome, int cpf, DateTime dataNasc, string login, string senha)
+        public Funcionario(int id, string nome, int cpf, DateTime dataNasc, string login, string senha)
         {
+            ID = id;
             Nome = nome;
             CPF = cpf;
             DataNasc = dataNasc;
