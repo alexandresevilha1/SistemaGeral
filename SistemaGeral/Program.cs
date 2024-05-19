@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SistemaGeral.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionStr = "server=localhost;userid=alex;password=1234;database=sistemageral";
 builder.Services.AddDbContext<SistemaGeralContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SistemaGeralContext") ?? throw new InvalidOperationException("Connection string 'SistemaGeralContext' not found.")));
+    options.UseMySql(connectionStr, ServerVersion.AutoDetect(connectionStr)));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
