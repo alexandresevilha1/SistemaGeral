@@ -10,22 +10,22 @@ using SistemaGeral.Models;
 
 namespace SistemaGeral.Controllers
 {
-    public class FuncionariosController : Controller
+    public class EmpresasController : Controller
     {
         private readonly SistemaGeralContext _context;
 
-        public FuncionariosController(SistemaGeralContext context)
+        public EmpresasController(SistemaGeralContext context)
         {
             _context = context;
         }
 
-        // GET: Funcionarios
+        // GET: Empresas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Funcionario.ToListAsync());
+            return View(await _context.Empresa.ToListAsync());
         }
 
-        // GET: Funcionarios/Details/5
+        // GET: Empresas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace SistemaGeral.Controllers
                 return NotFound();
             }
 
-            var funcionario = await _context.Funcionario
+            var empresa = await _context.Empresa
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (funcionario == null)
+            if (empresa == null)
             {
                 return NotFound();
             }
 
-            return View(funcionario);
+            return View(empresa);
         }
 
-        // GET: Funcionarios/Create
+        // GET: Empresas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Funcionarios/Create
+        // POST: Empresas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Nome,CPF,Email,Cargo,DataNasc,Login,Senha,SalarioBase")] Funcionario funcionario)
+        public async Task<IActionResult> Create([Bind("ID,Nome,CNPJ,Proprietario,Endereco")] Empresa empresa)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(funcionario);
+                _context.Add(empresa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(funcionario);
+            return View(empresa);
         }
 
-        // GET: Funcionarios/Edit/5
+        // GET: Empresas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace SistemaGeral.Controllers
                 return NotFound();
             }
 
-            var funcionario = await _context.Funcionario.FindAsync(id);
-            if (funcionario == null)
+            var empresa = await _context.Empresa.FindAsync(id);
+            if (empresa == null)
             {
                 return NotFound();
             }
-            return View(funcionario);
+            return View(empresa);
         }
 
-        // POST: Funcionarios/Edit/5
+        // POST: Empresas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Nome,CPF,Email,Cargo,DataNasc,Login,Senha,SalarioBase")] Funcionario funcionario)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Nome,CNPJ,Proprietario,Endereco")] Empresa empresa)
         {
-            if (id != funcionario.ID)
+            if (id != empresa.ID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace SistemaGeral.Controllers
             {
                 try
                 {
-                    _context.Update(funcionario);
+                    _context.Update(empresa);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FuncionarioExists(funcionario.ID))
+                    if (!EmpresaExists(empresa.ID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace SistemaGeral.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(funcionario);
+            return View(empresa);
         }
 
-        // GET: Funcionarios/Delete/5
+        // GET: Empresas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace SistemaGeral.Controllers
                 return NotFound();
             }
 
-            var funcionario = await _context.Funcionario
+            var empresa = await _context.Empresa
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (funcionario == null)
+            if (empresa == null)
             {
                 return NotFound();
             }
 
-            return View(funcionario);
+            return View(empresa);
         }
 
-        // POST: Funcionarios/Delete/5
+        // POST: Empresas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var funcionario = await _context.Funcionario.FindAsync(id);
-            if (funcionario != null)
+            var empresa = await _context.Empresa.FindAsync(id);
+            if (empresa != null)
             {
-                _context.Funcionario.Remove(funcionario);
+                _context.Empresa.Remove(empresa);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FuncionarioExists(int id)
+        private bool EmpresaExists(int id)
         {
-            return _context.Funcionario.Any(e => e.ID == id);
+            return _context.Empresa.Any(e => e.ID == id);
         }
     }
 }

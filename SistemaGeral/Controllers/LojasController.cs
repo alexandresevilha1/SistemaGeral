@@ -10,22 +10,22 @@ using SistemaGeral.Models;
 
 namespace SistemaGeral.Controllers
 {
-    public class FuncionariosController : Controller
+    public class LojasController : Controller
     {
         private readonly SistemaGeralContext _context;
 
-        public FuncionariosController(SistemaGeralContext context)
+        public LojasController(SistemaGeralContext context)
         {
             _context = context;
         }
 
-        // GET: Funcionarios
+        // GET: Lojas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Funcionario.ToListAsync());
+            return View(await _context.Loja.ToListAsync());
         }
 
-        // GET: Funcionarios/Details/5
+        // GET: Lojas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace SistemaGeral.Controllers
                 return NotFound();
             }
 
-            var funcionario = await _context.Funcionario
+            var loja = await _context.Loja
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (funcionario == null)
+            if (loja == null)
             {
                 return NotFound();
             }
 
-            return View(funcionario);
+            return View(loja);
         }
 
-        // GET: Funcionarios/Create
+        // GET: Lojas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Funcionarios/Create
+        // POST: Lojas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Nome,CPF,Email,Cargo,DataNasc,Login,Senha,SalarioBase")] Funcionario funcionario)
+        public async Task<IActionResult> Create([Bind("ID,Nome")] Loja loja)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(funcionario);
+                _context.Add(loja);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(funcionario);
+            return View(loja);
         }
 
-        // GET: Funcionarios/Edit/5
+        // GET: Lojas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace SistemaGeral.Controllers
                 return NotFound();
             }
 
-            var funcionario = await _context.Funcionario.FindAsync(id);
-            if (funcionario == null)
+            var loja = await _context.Loja.FindAsync(id);
+            if (loja == null)
             {
                 return NotFound();
             }
-            return View(funcionario);
+            return View(loja);
         }
 
-        // POST: Funcionarios/Edit/5
+        // POST: Lojas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Nome,CPF,Email,Cargo,DataNasc,Login,Senha,SalarioBase")] Funcionario funcionario)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Nome")] Loja loja)
         {
-            if (id != funcionario.ID)
+            if (id != loja.ID)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace SistemaGeral.Controllers
             {
                 try
                 {
-                    _context.Update(funcionario);
+                    _context.Update(loja);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FuncionarioExists(funcionario.ID))
+                    if (!LojaExists(loja.ID))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace SistemaGeral.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(funcionario);
+            return View(loja);
         }
 
-        // GET: Funcionarios/Delete/5
+        // GET: Lojas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace SistemaGeral.Controllers
                 return NotFound();
             }
 
-            var funcionario = await _context.Funcionario
+            var loja = await _context.Loja
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (funcionario == null)
+            if (loja == null)
             {
                 return NotFound();
             }
 
-            return View(funcionario);
+            return View(loja);
         }
 
-        // POST: Funcionarios/Delete/5
+        // POST: Lojas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var funcionario = await _context.Funcionario.FindAsync(id);
-            if (funcionario != null)
+            var loja = await _context.Loja.FindAsync(id);
+            if (loja != null)
             {
-                _context.Funcionario.Remove(funcionario);
+                _context.Loja.Remove(loja);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FuncionarioExists(int id)
+        private bool LojaExists(int id)
         {
-            return _context.Funcionario.Any(e => e.ID == id);
+            return _context.Loja.Any(e => e.ID == id);
         }
     }
 }

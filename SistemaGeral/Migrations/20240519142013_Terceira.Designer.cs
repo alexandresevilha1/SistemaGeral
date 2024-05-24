@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaGeral.Data;
 
@@ -11,9 +12,11 @@ using SistemaGeral.Data;
 namespace SistemaGeral.Migrations
 {
     [DbContext(typeof(SistemaGeralContext))]
-    partial class SistemaGeralContextModelSnapshot : ModelSnapshot
+    [Migration("20240519142013_Terceira")]
+    partial class Terceira
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,12 +44,11 @@ namespace SistemaGeral.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("ProprietarioID")
-                        .HasColumnType("int");
+                    b.Property<string>("Proprietario")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ProprietarioID");
 
                     b.ToTable("Empresa");
                 });
@@ -117,17 +119,6 @@ namespace SistemaGeral.Migrations
                     b.HasIndex("GerenteID");
 
                     b.ToTable("Loja");
-                });
-
-            modelBuilder.Entity("SistemaGeral.Models.Empresa", b =>
-                {
-                    b.HasOne("SistemaGeral.Models.Funcionario", "Proprietario")
-                        .WithMany()
-                        .HasForeignKey("ProprietarioID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Proprietario");
                 });
 
             modelBuilder.Entity("SistemaGeral.Models.Funcionario", b =>

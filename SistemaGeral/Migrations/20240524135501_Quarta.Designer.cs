@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaGeral.Data;
 
@@ -11,9 +12,11 @@ using SistemaGeral.Data;
 namespace SistemaGeral.Migrations
 {
     [DbContext(typeof(SistemaGeralContext))]
-    partial class SistemaGeralContextModelSnapshot : ModelSnapshot
+    [Migration("20240524135501_Quarta")]
+    partial class Quarta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

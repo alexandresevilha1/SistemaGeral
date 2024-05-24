@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaGeral.Data;
 
@@ -11,9 +12,11 @@ using SistemaGeral.Data;
 namespace SistemaGeral.Migrations
 {
     [DbContext(typeof(SistemaGeralContext))]
-    partial class SistemaGeralContextModelSnapshot : ModelSnapshot
+    [Migration("20240519125540_Segunda")]
+    partial class Segunda
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,16 +40,11 @@ namespace SistemaGeral.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Proprietario")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("ProprietarioID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("ProprietarioID");
 
                     b.ToTable("Empresa");
                 });
@@ -97,55 +95,11 @@ namespace SistemaGeral.Migrations
                     b.ToTable("Funcionario");
                 });
 
-            modelBuilder.Entity("SistemaGeral.Models.Loja", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("GerenteID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("GerenteID");
-
-                    b.ToTable("Loja");
-                });
-
-            modelBuilder.Entity("SistemaGeral.Models.Empresa", b =>
-                {
-                    b.HasOne("SistemaGeral.Models.Funcionario", "Proprietario")
-                        .WithMany()
-                        .HasForeignKey("ProprietarioID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Proprietario");
-                });
-
             modelBuilder.Entity("SistemaGeral.Models.Funcionario", b =>
                 {
                     b.HasOne("SistemaGeral.Models.Empresa", null)
                         .WithMany("Funcionarios")
                         .HasForeignKey("EmpresaID");
-                });
-
-            modelBuilder.Entity("SistemaGeral.Models.Loja", b =>
-                {
-                    b.HasOne("SistemaGeral.Models.Funcionario", "Gerente")
-                        .WithMany()
-                        .HasForeignKey("GerenteID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Gerente");
                 });
 
             modelBuilder.Entity("SistemaGeral.Models.Empresa", b =>
