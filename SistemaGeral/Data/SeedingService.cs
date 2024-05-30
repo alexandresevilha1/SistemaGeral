@@ -19,7 +19,7 @@ namespace SistemaGeral.Data
                 return; //Banco de dados já populado
             }
            
-            Funcionario Proprietario = new Funcionario(01, "Proprietario", 00, "funcionario00@gmail.com", Cargo.Propietario,new DateTime(01/01/2000), "login00", "senha00", 10000.00);
+            Funcionario Proprietario = new Funcionario(01, "Proprietario", 00, "Proprietario00@gmail.com", Cargo.Proprietario,new DateTime(01/01/2000), "login00", "senha00", 10000.00);
             Funcionario Surpevisor01 = new Funcionario(02, "Surpevisor01", 01, "Surpevisor01@gmail.com", Cargo.Surpevisor, new DateTime(01 / 02 / 2000), "login01", "senha01", 7500.00);
             Funcionario Surpevisor02 = new Funcionario(03, "Surpevisor02", 02, "Surpevisor02@gmail.com", Cargo.Surpevisor, new DateTime(02 / 02 / 2000), "login02", "senha02", 7500.00);
             Funcionario Gerente01 = new Funcionario(04, "Gerente01", 03, "Gerente01@gmail.com", Cargo.Gerente, new DateTime(01 / 03 / 2000), "login03", "senha03", 5000.00);

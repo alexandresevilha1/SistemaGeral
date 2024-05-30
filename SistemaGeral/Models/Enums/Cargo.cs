@@ -2,7 +2,7 @@
 {
     public enum Cargo : int
     {
-        Propietario = 0,
+        Proprietario = 0,
         Surpevisor = 1,
         Gerente = 2,
         Caixa = 3,

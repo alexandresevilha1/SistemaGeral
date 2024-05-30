@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<SistemaGeral.Models.Loja>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lojas";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-striped table-hover">
     <thead>
-        <tr>
+        <tr class="table-light">
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
