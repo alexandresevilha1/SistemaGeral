@@ -1,0 +1,19 @@
+﻿@model SistemaGeral.Models.Funcionario
+
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/css/login.css"/>
+
+<section>
+    <form action="/Login/"> 
+        <h1>Autenticação</h1>
+        <input type="text" name="email" value="@Model.Email" placeholder="Login/Email" />
+        <input type="password" name="senha" value="@Model.Senha" placeholder="Senha" />
+        <a href="#">Esqueceu a senha?</a>
+        <button type="submit">Login</button>
+    </form>
+    <label>Não tem conta? <a href="#">Crie aqui</a></label>
+</section>
+
