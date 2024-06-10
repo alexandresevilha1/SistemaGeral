@@ -7,10 +7,10 @@
 <link rel="stylesheet" href="~/css/login.css"/>
 
 <section>
-    <form action="/Login/"> 
+    <form asp-controller="Login" asp-action="Logar" method="post"> 
         <h1>Autenticação</h1>
-        <input type="text" name="email" value="@Model.Email" placeholder="Login/Email" />
-        <input type="password" name="senha" value="@Model.Senha" placeholder="Senha" />
+        <input type="text" name="login" placeholder="Login/Email" />
+        <input type="password" name="senha" placeholder="Senha" />
         <a href="#">Esqueceu a senha?</a>
         <button type="submit">Login</button>
     </form>

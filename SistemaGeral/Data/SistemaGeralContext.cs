@@ -17,5 +17,10 @@ namespace SistemaGeral.Data
         public DbSet<SistemaGeral.Models.Funcionario> Funcionario { get; set; } = default!;
         public DbSet<SistemaGeral.Models.Empresa> Empresa { get; set; } = default!;
         public DbSet<SistemaGeral.Models.Loja> Loja { get; set; } = default!;
+
+        internal async Task OpenAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
