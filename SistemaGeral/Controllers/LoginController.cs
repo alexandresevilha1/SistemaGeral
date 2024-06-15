@@ -16,30 +16,24 @@ namespace SistemaGeral.Controllers
             _context = context;
         }
 
-        public SistemaGeralContext MySqlConnection { get; private set; }
-
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Logar(string login, string senha)
+        [Route("Login")]
+        public async Task<IActionResult> Login(Funcionario funcionario)
         {
-            MySqlConnection MySqlConnection = new("server=localhost;userid=alex;password=1234;database=sistemageral");
-            await MySqlConnection.OpenAsync();
-
-            MySqlCommand Mysqlcommand = MySqlConnection.CreateCommand();
-            Mysqlcommand.CommandText = $"SELECT * FROM funcionario WHERE login = '{login}' AND Senha = '{senha}'";
-
-            MySqlDataReader reader = Mysqlcommand.ExecuteReader();
-
-            if (await reader.ReadAsync())
+            var usuario = _context.Funcionario.FirstOrDefault(x => x.Login == funcionario.Login && x.Senha == funcionario.Senha);
+            if (usuario != null)
             {
                 return RedirectToAction("Index", "Home");
             }
-
-            return Json(new { Msg = "Usuario Inválido" });
+            else
+            {
+                return NoContent();
+            }
         }
     }
 }
